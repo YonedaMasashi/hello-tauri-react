@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import StudentInfoInputTab from './StudentInfoInputTab';
-import StudentListTab from './StudentListTab';
+import StudentInfoInputTab from './compenents/StudentInfoInputTab';
+import StudentListTab from './compenents/StudentListTab';
 
 
 type Tab = {
