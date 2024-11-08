@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import StudentInfoInputFormData from './StudentInfoInputFormData';
 import {
   Box,
   TextField,
@@ -14,7 +15,12 @@ import {
   Button,
 } from '@mui/material';
 
-const StudentInfoInputTab: React.FC = () => {
+interface InputTabProps {
+    onAddData: (data: Omit<StudentInfoInputFormData, 'id'>) => void;
+}
+
+const StudentInfoInputTab: React.FC<InputTabProps> = ({ onAddData }) => {
+    const [name, setName] = useState('');  
     const [gender, setGender] = useState('');
     const [subjects, setSubjects] = useState<string[]>([]);
     const [committee, setCommittee] = useState('');
@@ -35,13 +41,16 @@ const StudentInfoInputTab: React.FC = () => {
     };
 
     const handleAdd = () => {
-        // データを保存するなどの処理を追加
-        console.log({ gender, subjects, committee });
+        onAddData({ name, gender, subjects, committee });
+        setName('');
+        setGender('');
+        setSubjects([]);
+        setCommittee('');
     };
     
     return (
         <Box mt={2}>
-            <TextField fullWidth label="名前" variant="outlined" />
+            <TextField fullWidth label="名前" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
 
             <FormControl component="fieldset" margin="normal">
                 <FormLabel component="legend">性別</FormLabel>
