@@ -27,9 +27,13 @@ const MainView: React.FC = () => {
         console.log(data);
     };
     
+    const handleDeleteData = (idsToDelete: number[]) => {
+        setData(data.filter((row) => !idsToDelete.includes(row.id)));
+    };
+
     const tabDefineList: TabDefine[] = [
         { label: '入力', content: <StudentInfoInputTab onAddData={handleAddData} />},
-        { label: '一覧', content: <StudentListTab />}
+        { label: '一覧', content: <StudentListTab data={data} onDeleteData={handleDeleteData} />}
     ];
 
     return (
